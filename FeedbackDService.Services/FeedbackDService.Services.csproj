@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FeedbackDService.Configs\FeedbackDService.Configs.csproj" />
+      <ProjectReference Include="..\FeedbackDService.Data.Context\FeedbackDService.Data.Context.csproj" />
+      <ProjectReference Include="..\FeedbackDService.Data.Requests\FeedbackDService.Data.Requests.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
+    </ItemGroup>
+
+</Project>
