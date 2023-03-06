@@ -3,7 +3,6 @@ using Reviewer.Data.Context;
 using Reviewer.Extensions;
 using Reviewer.Mapper;
 using Reviewer.Middlewares;
-using Reviewer.Migrations;
 using Reviewer.Services.Authentication;
 using Reviewer.Services.FileSaveService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

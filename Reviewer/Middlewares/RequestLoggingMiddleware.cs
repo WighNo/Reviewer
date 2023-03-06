@@ -1,4 +1,4 @@
-﻿namespace Reviewer.Migrations;
+﻿namespace Reviewer.Middlewares;
 
 /// <summary>
 /// Middleware для логирования всех запросов
