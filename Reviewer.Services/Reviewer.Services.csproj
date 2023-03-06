@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Reviewer.Configs\Reviewer.Configs.csproj" />
+      <ProjectReference Include="..\Reviewer.Data.Context\Reviewer.Data.Context.csproj" />
+      <ProjectReference Include="..\Reviewer.Data.Requests\Reviewer.Data.Requests.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
+    </ItemGroup>
+
+</Project>
