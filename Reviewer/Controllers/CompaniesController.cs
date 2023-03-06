@@ -76,14 +76,8 @@ public class CompaniesController : ControllerBase
     [Authorize(Roles = UserRoles.Admin)]
     public async Task<IActionResult> AddNew([FromForm] AddCompanyRequest request)
     {
-        var formCollection = await HttpContext.Request.ReadFormAsync();
-        var photo = formCollection.Files[request.FormImageKey];
-        
-        if (photo is null)
-            return new FormFileNotFound(request.FormImageKey);
-
         var company = _mapper.Map<Company>(request);
-        company.ImageUrl = await _imageSaveService.SaveAsync(photo, SavePathsConfig.CompaniesImages);
+        company.ImageUrl = await _imageSaveService.SaveAsync(request.Image, SavePathsConfig.CompaniesImages);
 
         if (request.CategoriesIds is null || request.CategoriesIds.Count == 0)
         {

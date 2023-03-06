@@ -1,3 +1,5 @@
-﻿namespace Reviewer.Data.Requests;
+﻿using Microsoft.AspNetCore.Http;
 
-public record AddCompanyRequest(string Name, string Description, string FormImageKey, List<int>? CategoriesIds);
+namespace Reviewer.Data.Requests;
+
+public record AddCompanyRequest(string Name, string Description, IFormFile Image, List<int>? CategoriesIds);
