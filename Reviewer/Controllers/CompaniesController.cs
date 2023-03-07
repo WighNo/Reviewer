@@ -42,6 +42,9 @@ public class CompaniesController : ControllerBase
     /// <param name="id">ID компании</param>
     /// <returns></returns>
     [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(Company), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CompanyByIdNotFound), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get(int id)
     {
         var company = await _dataContext.Companies
@@ -49,7 +52,7 @@ public class CompaniesController : ControllerBase
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (company is null)
-            return BadRequest();
+            return new CompanyByIdNotFound(id);
         
         return Ok(company);
     }
@@ -59,6 +62,7 @@ public class CompaniesController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("all")]
+    [ProducesResponseType(typeof(List<Company>), StatusCodes.Status200OK)]
     public IActionResult All()
     {
         var companies = _dataContext.Companies
@@ -74,6 +78,8 @@ public class CompaniesController : ControllerBase
     /// <returns></returns>
     [HttpPost("add")]
     [Authorize(Roles = UserRoles.Admin)]
+    [ProducesResponseType(typeof(Company), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> AddNew([FromForm] AddCompanyRequest request)
     {
         var company = _mapper.Map<Company>(request);

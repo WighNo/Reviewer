@@ -23,6 +23,8 @@ services.AddScoped<IAuthenticationService, AuthenticationService>();
 services.AddAutoMapper(typeof(MapperProfile.Authorization));
 services.AddAutoMapper(typeof(MapperProfile.CompanyCategoryProfile));
 services.AddAutoMapper(typeof(MapperProfile.CompanyProfile));
+services.AddAutoMapper(typeof(MapperProfile.ProductProfile));
+services.AddAutoMapper(typeof(MapperProfile.ProductCategoryProfile));
 
 string webRootPath = builder.Environment.WebRootPath;
 services.AddScoped<ImageFileSaveService>(_ => new ImageFileSaveService

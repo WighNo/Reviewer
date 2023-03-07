@@ -56,4 +56,32 @@ public class MapperProfile
             CreateMap<AddCompanyRequest, Company>();
         }
     }
+    
+    /// <summary>
+    /// Профиль для товаров и услуг
+    /// </summary>
+    public class ProductProfile : Profile
+    {
+        /// <summary>
+        /// Конструктор клааса. В нём объявляются все карты для маппинга
+        /// </summary>
+        public ProductProfile()
+        {
+            CreateMap<AddProductRequest, Product>();
+        }
+    }
+    
+    /// <summary>
+    /// Профиль для категорий товаров и услуг
+    /// </summary>
+    public class ProductCategoryProfile : Profile
+    {
+        /// <summary>
+        /// Конструктор клааса. В нём объявляются все карты для маппинга
+        /// </summary>
+        public ProductCategoryProfile()
+        {
+            CreateMap<AddProductCategoryRequest, ProductCategory>();
+        }
+    }
 }

@@ -15,6 +15,8 @@ public class DataContext: DbContext
         optionsBuilder.UseNpgsql(options => options.MigrationsAssembly("Reviewer"));
     }
 
+    public DbSet<User> Users => Set<User>();
+
     public DbSet<CompanyCategory> CompanyCategories => Set<CompanyCategory>();
 
     public DbSet<Company> Companies => Set<Company>();
@@ -23,5 +25,9 @@ public class DataContext: DbContext
 
     public DbSet<Product> Products => Set<Product>();
 
-    public DbSet<User> Users => Set<User>();
+    public DbSet<Review> Reviews => Set<Review>();
+
+    public DbSet<Like> Likes => Set<Like>();
+    
+    public DbSet<Dislike> Dislikes => Set<Dislike>();
 }

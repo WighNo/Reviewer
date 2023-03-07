@@ -5,15 +5,15 @@ namespace Reviewer.Data.Responses.Errors.NotFound;
 /// <summary>
 /// 
 /// </summary>
-public class FormFileNotFound : CustomErrorBase
+public class FormFileByKeyNotFound : CustomErrorBase
 {
     /// <summary>
     /// Конструктор класса
     /// </summary>
-    /// <param name="nameOfForm">nameof(Self)</param>
-    public FormFileNotFound(string nameOfForm)
+    /// <param name="formFileKey">Ключ к FormFile'у</param>
+    public FormFileByKeyNotFound(string formFileKey)
     {
-        Content = CreateErrorContent($"Не удалось найти FormFile {nameOfForm}");
+        Content = CreateErrorContent($"Не удалось найти FormFile по ключу {formFileKey}");
     }
     
     /// <summary>

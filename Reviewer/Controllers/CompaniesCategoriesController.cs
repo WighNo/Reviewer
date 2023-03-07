@@ -34,6 +34,8 @@ public class CompaniesCategoriesController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("all")]
+    [ProducesResponseType(typeof(List<CompanyCategory>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult All()
     {
         return Ok(_dataContext.CompanyCategories);
@@ -45,6 +47,10 @@ public class CompaniesCategoriesController : ControllerBase
     /// <returns></returns>
     [HttpPost("create")]
     [Authorize(Roles = UserRoles.Admin)]
+    [ProducesResponseType(typeof(CompanyCategory), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateNew([FromForm] CreateCompanyCategoryRequest request)
     {
         var category = _mapper.Map<CompanyCategory>(request);
@@ -52,9 +58,9 @@ public class CompaniesCategoriesController : ControllerBase
         if (_dataContext.CompanyCategories.Any(x => x.Name == category.Name))
             return BadRequest();
 
-        await _dataContext.CompanyCategories.AddAsync(category);
+        var result = await _dataContext.CompanyCategories.AddAsync(category);
         await _dataContext.SaveChangesAsync();
 
-        return Ok(category);
+        return Ok(result.Entity);
     }
 }

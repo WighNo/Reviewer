@@ -1,26 +1,26 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace Reviewer.Data.Responses.Errors.NotFound;
 
 /// <summary>
-/// 
+/// Компания не найдена
 /// </summary>
-public class FormFileNotFound : CustomErrorBase
+public class CompanyByIdNotFound : CustomErrorBase
 {
     /// <summary>
     /// Конструктор класса
     /// </summary>
-    /// <param name="nameOfForm">nameof(Self)</param>
-    public FormFileNotFound(string nameOfForm)
+    /// <param name="companyId"></param>
+    public CompanyByIdNotFound(int companyId)
     {
-        Content = CreateErrorContent($"Не удалось найти FormFile {nameOfForm}");
+        Content = CreateErrorContent($"Не удалось найти компанию с id {companyId}");
     }
-    
+
     /// <summary>
-    /// Описание
+    /// Описание ошибки
     /// </summary>
     public override CustomErrorContent Content { get; }
-    
+
     /// <summary>
     /// Код ответа
     /// </summary>
