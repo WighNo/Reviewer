@@ -84,4 +84,18 @@ public class MapperProfile
             CreateMap<AddProductCategoryRequest, ProductCategory>();
         }
     }
+    
+    /// <summary>
+    /// Профиль для рецензий
+    /// </summary>
+    public class ReviewProfile : Profile
+    {
+        /// <summary>
+        /// Конструктор клааса. В нём объявляются все карты для маппинга
+        /// </summary>
+        public ReviewProfile()
+        {
+            CreateMap<CreateReviewRequest, Review>();
+        }
+    }
 }

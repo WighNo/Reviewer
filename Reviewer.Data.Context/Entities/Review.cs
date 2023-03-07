@@ -6,6 +6,8 @@ public class Review : EntityBase
 
     public string Title { get; set; } = null!;
     
+    public int Rating { get; set; }
+    
     public string Content { get; set; } = null!;
     
     public string? Dignities { get; set; }

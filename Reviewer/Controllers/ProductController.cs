@@ -8,6 +8,7 @@ using Reviewer.Data.Context.Entities;
 using Reviewer.Data.Models;
 using Reviewer.Data.Requests;
 using Reviewer.Data.Responses.Errors.NotFound;
+using Reviewer.Helpers;
 using Reviewer.Services.FileSaveService;
 
 namespace Reviewer.Controllers;
@@ -34,6 +35,49 @@ public class ProductController : ControllerBase
         _dataContext = dataContext;
         _mapper = mapper;
         _fileSaveService = fileSaveService;
+    }
+
+    
+    /// <summary>
+    /// Добавить рецензию товару
+    /// </summary>
+    /// <param name="productId">ID товара</param>
+    /// <param name="request">Параметры</param>
+    /// <returns></returns>
+    [Authorize]
+    [HttpPost("add-review/{productId:int}")]
+    [ProducesResponseType(typeof(List<Review>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(UserNotFound), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ProductNotFound), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> AddReview(int productId, [FromBody] CreateReviewRequest request)
+    {
+        var userId = HttpContext.GetUserIdClaim();
+        var user = await _dataContext.Users
+            .FirstOrDefaultAsync(x => x.Id == userId);
+
+        if (user is null)
+            return new UserNotFound(userId);
+        
+        var product = await _dataContext.Products
+            .Where(x => x.Id == productId)
+            .Include(x => x.Reviews)
+            .SingleOrDefaultAsync();
+        
+        if(product is null)
+            return new ProductNotFound(productId);
+
+        var review = _mapper.Map<Review>(request);
+        review.Owner = user;
+
+        var reviewEntry = await _dataContext.Reviews.AddAsync(review);
+        
+        product.Reviews ??= new List<Review>();
+        product.Reviews.Add(reviewEntry.Entity);
+
+        var productEntry = _dataContext.Products.Update(product);
+
+        return Ok(productEntry.Entity.Reviews);
     }
 
     /// <summary>
