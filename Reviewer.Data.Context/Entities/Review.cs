@@ -10,9 +10,9 @@ public class Review : EntityBase
     
     public string Content { get; set; } = null!;
     
-    public string? Dignities { get; set; }
+    public List<string>? Dignities { get; set; }
     
-    public string? Disadvantages { get; set; }
+    public List<string>? Disadvantages { get; set; }
 
     public List<Like>? Likes { get; set; } = new();
 

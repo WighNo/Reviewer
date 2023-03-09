@@ -37,6 +37,20 @@ public class ProductController : ControllerBase
         _fileSaveService = fileSaveService;
     }
 
+    /// <summary>
+    /// Получить топ-10 рецензий
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("top-ten")]
+    public IActionResult TopTenReviews()
+    {
+        var reviews = _dataContext.Reviews
+            .AsNoTracking()
+            .OrderByDescending(x => x.Likes!.Count)
+            .Take(10);
+
+        return Ok(reviews);
+    }
     
     /// <summary>
     /// Добавить рецензию товару

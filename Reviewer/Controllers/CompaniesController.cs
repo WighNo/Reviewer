@@ -83,6 +83,7 @@ public class CompaniesController : ControllerBase
     public async Task<IActionResult> AddNew([FromForm] AddCompanyRequest request)
     {
         var company = _mapper.Map<Company>(request);
+        company.FoundationDate = request.FoundationDate.ToUniversalTime();
         company.ImageUrl = await _imageSaveService.SaveAsync(request.Image, SavePathsConfig.CompaniesImages);
 
         if (request.CategoriesIds is null || request.CategoriesIds.Count == 0)

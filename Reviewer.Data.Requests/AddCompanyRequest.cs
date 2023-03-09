@@ -2,4 +2,4 @@
 
 namespace Reviewer.Data.Requests;
 
-public record AddCompanyRequest(string Name, string Description, IFormFile Image, List<int>? CategoriesIds);
+public record AddCompanyRequest(string Name, string Description, string Founder, DateTime FoundationDate, IFormFile Image, List<int>? CategoriesIds);
